@@ -58,9 +58,9 @@ public class UserService {
 
     this.userRepository.save(newUser);
     login(newUser.getEmail());
-    emailService.sendRegistrationEmail(newUser.getEmail(),
-        newUser.getFirstName() + " " + newUser.getLastName(),
-        preferredLocale);
+    //emailService.sendRegistrationEmail(newUser.getEmail(),
+        //newUser.getFirstName() + " " + newUser.getLastName(),
+        //preferredLocale);
   }
 
 

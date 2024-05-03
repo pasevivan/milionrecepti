@@ -3,11 +3,12 @@ spring:
     driverClassName: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/mobilele?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC
     username: root
-    password:
+    password: 820320
   jpa:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: create
+     #create-drop
     defer-datasource-initialization: true
   mvc:
     hiddenmethod:
@@ -37,7 +38,7 @@ mail:
 
 management:
   server:
-    port: 8081
+    port: 8080
   endpoints:
     web:
       base-path: /actuator
