@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th=http://www.thymeleaf.org>
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="рецепти, готварски рецепти, кулинарни рецепти, готвене, какво да сготвя, храна" name="keywords">
+    <meta content="Готварски рецепти със снимки, необходими продукти, порции, време за приготвяне и стъпки, които да следваш, за да сготвиш своето ястие."
+          property="description">
+    <link href="/images/icon.png" rel="icon" type="image/x-icon">
+    <link href="/css/styles.css" rel="stylesheet" type="text/css"/>
+    <link href="https://fonts.googleapis.com/css?family=Sofia" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+
+    <title>Да сготвим - Рецепти</title>
+</head>
+
+<body>
+
+<div th:replace="fragments/navbar">Navbar</div>
+
+<hr style="width:100%;text-align:left;margin-left:0">
+<!-- FOOD MENU SECTION -->
+<section class="bg-img bg-img-fixed" id="recipes-section">
+    <h2 class="text-center text-white mt-5" style="text-align: center">Рецепти</h2>
+    <div class="food-menu">
+        <div class="food-item-wrap all" id="recipe-dashboard">
+            <div class="food-item lorem-type"
+                 th:each="recipe : ${recipes}"
+                 th:object="${recipe}"
+            >
+                <a class="recipe-detail-a" th:href="@{/recipes/recipes_dashboard/{recipeId}(recipeId=*{id})}">
+                    <div class="item-wrap bottom-up play-on-scroll">
+                        <div class="item-img">
+                            <div class="img-holder bg-img">
+                                <img alt="Recipe image" th:src="*{images.iterator().next()}">
+                            </div>
+                        </div>
+                        <div class="item-info">
+                            <div>
+                                <h3>
+                                    <th:block th:text="*{name}"></th:block>
+                                </h3>
+                                <span> &#128337; <th:block th:text="*{hours}"></th:block>:<th:block
+                                        th:text="*{minutes}"></th:block> ч.</span>
+                            </div>
+                            <div class="cart-btn">
+                                <i class="bx bx-cart-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div th:replace="fragments/footer">Footer</div>
+
+</body>
+
+</html>

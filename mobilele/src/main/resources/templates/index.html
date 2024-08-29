@@ -1,40 +1,149 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">>
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <meta charset="UTF-8">
+
     <title>MobiLeLeLe</title>
     <link rel="stylesheet" href="/css/reset-css.css"/>
     <link rel="stylesheet" href="/css/bootstrap.min.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/main.css"/>
+<!--    <link href="/css/recipe.css" rel="stylesheet" type="text/css"/>-->
+    <link href="/css/dashboard.css" rel="stylesheet" type="text/css"/>
+
+    <link rel="stylesheet" type="text/css" href="/css/css-main.css"/>
     <script src="/js/jquery-3.5.1.slim.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
 </head>
 
 <body>
-
+<div class="main-container">
 <div th:replace="fragments/navbar">Navbar</div>
+    <div class="left nopadding"></div>
+    <div class="main nopadding">
+        <h5 class="text-center">
+            Добре дошли в Милион Рецепти!
+
+        </h5>
+
+        <div class="random"></div>
+        <div class="left-main">
+
+        </div>
+
+       <div class="recepies" >
+
+           <h2 class="text-center mt-5">Всички рецепти</h2>
+<!--        <table>-->
+<!--            <thead>-->
+<!--            <th>Name</th>-->
+<!--            <th>Ingredients</th>-->
+<!--            <th>Making</th>-->
+<!--            </thead>-->
+<!--            <tbody>-->
+<!--            <tr th:each = "user : ${users}">-->
+<!--                <td th:text = "${user.firstName}"></td>-->
+<!--                <td th:text = "${user.id}"></td>-->
+<!--                <td th:text = "${user.lastName}"></td>-->
+<!--            </tr>-->
+<!--            </tbody>-->
+<!--        </table>-->
 
 
-<div class="container-fluid">
-    <h5 class="text-center text-white mt-5">
-        Welcome to MobiLeLeLe,
-        <span
-                sec:authorize="isAuthenticated()"
-                th:text="${#authentication.principal.fullName}">
-        </span>
 
-        <span sec:authorize="!isAuthenticated()">
-            Anonymous
-        </span>
-    </h5>
-</div>
+            <div class="columns">
+                            <div class="recipe" th:each="recipe : ${recipes.getContent()}" th:object="${recipe}">
 
-<div>
-    <footer> </footer>
-</div>
+                <a href="#" th:href="@{/recipe_details/{recipeId}(recipeId=*{id})}">
+
+                    <div class="card-img-top-wrapper">
+                        <img class="card-img-top" th:src="*{images.iterator().next()}" alt="Car image">
+
+                    </div>
+<!--                    <div class="card-body pb-1">-->
+<!--                        <h5 class="card-title">-->
+                            <!--<th:block th:text="*{offerHighlight}"></th:block>-->
+<!--                        </h5>-->
+<!--                    </div>-->
+<!--                    <ul class="offer-details list-group list-group-flush">-->
+<!--                        <li class="list-group-item">-->
+                            <div class="card-text"><span><th:block th:text="*{name}"></th:block> </span></div>
+<!--                            <div class="card-text">-->
+                                <span><th:block th:text="*{category}"></th:block></span>
+<!--                            </div>-->
+                            <!--                            <div class="card-text"><span>• Подкатегория <th:block th:text="*{subcategory}"></th:block></span></div>-->
+                            <!--<div class="card-text"><span>• Ingredients <th:block th:text="*{ingredients}"></th:block> </span></div>-->
+<!--                        </li>-->
+<!--                    </ul>-->
+                    <!--                    <div class="card-body">-->
+                                  <!--<a class="card-link" href="#" th:href="@{/recipes/{recipeId}(recipeId=*{id})}">Детайли</a>-->
+                    <!--                    </div>-->
+<!--                </div>-->
+                <div class="card-text"><span><th:block th:text="*{subcategory}"></th:block> </span></div>
+                <div class="card-text"><span><th:block th:text="*{authorFirstName} + ' ' + *{authorLastName}"></th:block> </span></div>
+                </a>
+            </div>
+
+        </div>
+
+
+
+        <div class="container-fluid container-fluid row justify-content-center">
+            <nav>
+                <ul class="pagination">
+                    <li class="page-item" th:classappend="${recipes.isFirst()} ? 'disabled' : ''">
+                        <a th:unless="${recipes.isFirst()}"
+                           th:href="@{/all(size=${recipes.getSize()},page=0)}"
+                           class="page-link" href="#">First</a>
+                        <a th:if="${recipes.isFirst()}"
+                           class="page-link" href="#">First</a>
+                    </li>
+                </ul>
+            </nav>
+            <nav>
+                <ul class="pagination">
+                    <li class="page-item" th:classappend="${recipes.hasPrevious() ? '' : 'disabled'}">
+                        <a th:if="${recipes.hasPrevious()}"
+                           th:href="@{/all(size=${recipes.getSize()},page=${recipes.getNumber() - 1})}"
+                           class="page-link" href="#">Previous</a>
+                        <a th:unless="${recipes.hasPrevious()}"
+                           class="page-link" href="#">Previous</a>
+                    </li>
+                </ul>
+            </nav>
+            <nav>
+                <ul class="pagination">
+                    <li class="page-item" th:classappend="${recipes.hasNext() ? '' : 'disabled'}">
+                        <a th:if="${recipes.hasNext()}"
+                           th:href="@{/all(size=${recipes.getSize()},page=${recipes.getNumber() + 1})}"
+                           class="page-link" href="#">Next</a>
+                        <a th:unless="${recipes.hasNext()}"
+                           class="page-link" href="#">Next</a>
+                    </li>
+                </ul>
+            </nav>
+            <nav>
+                <ul class="pagination">
+                    <li class="page-item" th:classappend="${recipes.isLast()} ? 'disabled' : ''">
+                        <a th:unless="${recipes.isLast()}"
+                           th:href="@{/all(size=${recipes.getSize()},page=${recipes.getTotalPages() - 1})}"
+                           class="page-link" href="#">Last</a>
+                        <a th:if="${recipes.isLast()}"
+                           class="page-link" href="#">Last</a>
+                    </li>
+                </ul>
+            </nav>
+           </div>
+        </div>
+        </div>
+    <div class="right nopadding"></div>
+      </div>
+
+
+
+
+        <div class="footer"></div>
 
 </body>
 </html>

@@ -1,0 +1,212 @@
+body {
+    background-color: lightgreen;
+    margin: 0;
+    padding: 0;
+
+ }
+
+ .nopadding {
+    padding: 0 !important;
+    margin: 0 !important;
+ }
+
+ @media only screen and (min-width: 769px){
+  .main-container{
+    float: left;
+    top: 0px;
+    width: 100%;
+    height: 1400px;
+    margin: 0;
+    padding: 0;
+    background-color: aqua;
+  }
+
+
+  .header{
+    position: sticky;
+    top: 0;
+    width: 100%;
+    background-color: rgb(254, 8, 8);
+    height: 65px;
+    z-index: 999;
+  }
+
+  .logo{
+    float: left;
+    left: 15%;
+    position: relative;
+    top: 0px;
+    height: 65px;
+    width: 21%;
+    background-color: black;
+    color: white;
+    font-size: 50px;
+  }
+
+  .menu{
+    float: left;
+    left: 15%;
+    position: relative;
+    top: 0px;
+    height: 65px;
+    width: 36.4%;
+    background-color: rgb(174, 121, 244);
+    color: rgb(88, 68, 84);
+    font-size: 15px;
+  }
+
+  .login{
+    float: left;
+    left: 15%;
+    position: relative;
+    top: 0px;
+    height: 65px;
+    width: 12.6%;
+    background-color: rgb(104, 208, 55);
+    color: rgb(34, 7, 7);
+    font-size: 15px;
+  }
+
+
+.left{
+    position: relative;
+    float:left;
+    top: 0px;
+    width: 15%;
+    border-style: solid;
+  border-width: 0px;
+  background-color: blanchedalmond;
+  height: 1400px;
+  overflow: hidden;
+}
+
+.main{
+  float:left;
+    position: relative;
+    left: 0%;
+    padding-top: 0px;
+    top: 0px;
+    width: 70%;
+    color: blueviolet;
+    border-style: solid;
+  border-width: 1px;
+  background-color: rgb(4, 252, 119);
+  height: 1400px;
+  overflow: hidden;
+}
+
+.right{
+  float:left;
+    position: relative;
+    top: 0px;
+    left: 0%;
+    width: 15%;
+    border-style: solid;
+  border-width: 0px;
+  background-color: burlywood;
+  height: 1400px;
+}
+
+.random{
+  position: relative;
+  background-image: url("/images/lemons.jpeg");
+  left: 0px;
+  left: 0px;
+  height: 250px;
+  width: 100%;
+
+}
+
+.left-main{
+  float: left;
+  position: relative;
+  background-color: rgb(178, 178, 242);
+  width: 22%;
+  height: 800px;
+}
+
+.recipes_holder{
+ top:0px;
+ position: relative;
+ width: 30%;
+ height: 800px;
+ }
+
+ .item_holder{
+ top: 0px;
+ position: relative;
+
+ font-size: 10px;
+ }
+
+ .item-img{
+ height: 100px;
+ }
+
+.columns {
+    /*column-count: 3;*/
+    content: '';
+      display: block;
+      clear: both;
+/*column-count:3;
+    height: 600px;
+    width: 100%;*/
+}
+
+li {
+flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: calc(33.33% - 20px);
+}
+
+
+
+.recipe{
+border: 1px solid black;
+height: 300px;
+overflow: hidden;
+background-color: white;
+ width: calc(33.33% - 20px); /* 10px margin on the left plus 10px margin on the right */
+  float: left;
+}
+
+.recepies{
+  float: left;
+  position: relative;
+  background-color: white;
+  width: 78%;
+  height: 800px;
+}
+
+
+
+.footer{
+  float: left;
+  position: relative;
+  top: 0px;
+  width: 100%;
+  height: 500px;
+  background-color: black;
+}
+
+
+ }
+
+ @media only screen and (max-width: 768px) {
+
+
+    .main{
+        width: 100%;
+        color: blueviolet;
+        border-style: solid;
+      border-width: 1px;
+      background-color: rgb(10, 108, 56);
+      height: 400px;
+    }
+  }
+
+
+
+
+
+

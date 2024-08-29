@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th=http://www.thymeleaf.org>
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="рецепти, готварски рецепти, кулинарни рецепти, готвене, какво да сготвя, храна" name="keywords">
+    <meta content="Готварски рецепти със снимки, необходими продукти, порции, време за приготвяне и стъпки, които да следваш, за да сготвиш своето ястие."
+          property="description">
+    <link href="/images/icon.png" rel="icon" type="image/x-icon">
+    <link href="/css/bootstrap/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/css/styles.css" rel="stylesheet" type="text/css"/>
+    <link href="https://fonts.googleapis.com/css?family=Sofia" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+
+    <title>Да сготвим - Добавяне на рецепта</title>
+</head>
+
+<body id="add-body">
+
+<div th:replace="fragments/navbar">Navbar</div>
+
+<h4 style="text-align: center">Добавяне на рецепта <img alt="icon" id="add_icon" src="/images/add_icon.png"></h4>
+
+<!-- Add Recipe Page -->
+<div class="container" style="margin-top: 15px">
+    <section id="add">
+        <form id="add-form"
+              th:action="@{/recipes/recipe_add}"
+              th:method="POST"
+              th:object="${addRecipeModel}"
+              enctype="multipart/form-data">
+        >
+            <div class="row">
+                <div class="form-group col-md-6 mb-3">
+                    <label for="name">Име на рецептата:</label>
+                    <input
+                            class="form-control"
+                            id="name"
+                            placeholder="Име на рецептата"
+                            th:errorclass="is-invalid"
+                            th:field="*{name}"
+                            type="text"
+                    />
+                    <p class="invalid-feedback errors alert alert-danger" style="margin-top: -15px">
+                        Името на рецептата е задължително.
+                    </p>
+                </div>
+                <div class="form-group col-md-6 mb-3">
+                    <label for="category">За коя категория е най-подходящо ястието ти?</label>
+                    <select
+                            class="form-control"
+                            id="category"
+                            name="category"
+                            th:errorclass="is-invalid">
+                        <option value="">- Избери категория -</option>
+                        <option th:each="cat : ${T(bg.softuni.milionrecepti.model.enums.CategoryEnum).values()}"
+                                th:selected="${cat} == *{category}"
+                                th:text="${cat}"
+                                th:value="${cat}">
+                            Категория
+                        </option>
+                    </select>
+                    <p class="invalid-feedback errors alert alert-danger" style="margin-top: -2px">
+                        Категорията на рецептата е задължителна.
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6 mb-3">
+                    <label for="subcategory">А за коя подкатегория е най-подходящо ястието ти?</label>
+                    <select
+                            class="form-control"
+                            id="subcategory"
+                            name="subcategory"
+                            th:errorclass="is-invalid">
+                        <option value="">- Избери подкатегория -</option>
+                        <option th:each="s : ${T(bg.softuni.milionrecepti.model.enums.SubcategoryEnum).values()}"
+                                th:selected="${s} == *{subcategory}"
+                                th:text="${s}"
+                                th:value="${s}">
+                            Подкатегория
+                        </option>
+                    </select>
+                    <p class="invalid-feedback errors alert alert-danger" style="margin-top: -2px">
+                        Подкатегорията на рецептата е задължителна.
+                    </p>
+                </div>
+                <div class="form-group col-md-6 mb-3">
+                    <label>Вегетарианска ли е рецептата?</label>
+                    <div>
+                        <input type="radio" id="no" name="no" value="false" th:field="*{vegetarian}">
+                        <label for="no">Не</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="yes" name="yes" value="true" th:field="*{vegetarian}">
+                        <label for="yes">Да</label>
+                    </div>
+                </div>
+            </div>
+            <div>
+<!--                <label>Избери минимум 1 и максимум 3 (URL) снимки:</label>-->
+<!--                <input-->
+<!--                        class="form-control"-->
+<!--                        placeholder="Качи снимка тук"-->
+<!--                        th:errorclass="is-invalid"-->
+<!--                        th:field="*{firstImage}"-->
+<!--                        type="url"-->
+<!--                />-->
+<!--                <p class="invalid-feedback errors alert alert-danger" style="margin-top: -2px">-->
+<!--                    Моля, качи снимка на рецептата.-->
+<!--                </p>-->
+<!--                <input-->
+<!--                        class="form-control"-->
+<!--                        id="secondImage"-->
+<!--                        placeholder="Качи снимка тук"-->
+<!--                        th:field="*{secondImage}"-->
+<!--                        type="url"-->
+<!--                />-->
+<!--                <input-->
+<!--                        class="form-control"-->
+<!--                        id="thirdImage"-->
+<!--                        placeholder="Качи снимка тук"-->
+<!--                        th:field="*{thirdImage}"-->
+<!--                        type="url"-->
+<!--                />-->
+                <div>
+                    <label for="images">Upload Images:</label>
+                    <input type="file" id="images" name="images" multiple>
+                </div>
+            </div>
+            <div>
+                <label for="portions">Порции:</label>
+                <input
+                        class="form-control"
+                        id="portions"
+                        placeholder="Порции"
+                        step="1"
+                        th:errorclass="is-invalid"
+                        th:field="*{portions}"
+                        type="number"
+                />
+                <p class="invalid-feedback errors alert alert-danger" style="margin-top: -15px">
+                    Моля, въведи брой порции.
+                </p>
+            </div>
+
+            <div>
+                <label>Необходими продукти:</label>
+                <input
+                        class="form-control"
+                        id="ingredients"
+                        placeholder="Изброй всички продукти"
+                        th:errorclass="is-invalid"
+                        th:field="*{ingredients}"
+                        type="text"
+                />
+                <p class="invalid-feedback errors alert alert-danger" style="margin-top: -15px">
+                    Моля, въведи продукти.
+                </p>
+            </div>
+            <div class="form-group">
+                <label for="steps">Начин на приготвяне:</label>
+                <textarea
+                        class="form-control"
+                        id="steps"
+                        placeholder="Въведи стъпките"
+                        rows="3"
+                        th:errorclass="is-invalid"
+                        th:field="*{making}"
+                        type="textarea"
+                >
+                    </textarea>
+                <p class="invalid-feedback errors alert alert-danger" style="margin-top: -2px">
+                    Стъпките за приготвяне са задължителни.
+                </p>
+            </div>
+            <div class="form-group">
+                <label>Време за приготвяне:</label>
+                <div class="wrapper">
+                    <input
+                            class="form-control"
+                            id="hours"
+                            placeholder="Брой часове"
+                            th:errorclass="is-invalid"
+                            th:field="*{hours}"
+                            type="text"
+                    />
+                    <input
+                            class="form-control"
+                            id="minutes"
+                            placeholder="Брой минути"
+                            th:errorclass="is-invalid"
+                            th:field="*{minutes}"
+                            type="text"
+                    />
+                    <p class="invalid-feedback errors alert alert-danger" style="margin-top: -15px">
+                        Часовете са задължителни.
+                    </p>
+                    <p class="invalid-feedback errors alert alert-danger" style="margin-top: -15px">
+                        Минутите са задължителни.
+                    </p>
+                </div>
+            </div>
+
+            <input class="registerbtn" type="submit" value="Добавяне"/>
+
+        </form>
+    </section>
+</div>
+
+<!--<div th:replace="fragments/footer">Footer</div>-->
+
+</body>
+
+</html>
