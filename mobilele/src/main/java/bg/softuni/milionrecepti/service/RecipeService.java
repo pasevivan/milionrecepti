@@ -44,7 +44,7 @@ public class RecipeService {
     private final CategoryRepository categoryRepository;
     private final RecipeMapper recipeMapper;
     //private final CloudinaryConfig cloudinary = new  CloudinaryConfig();
-    private final String uploadDir = "images";  // Directory to save images
+    private final String uploadDir = "src/main/resources/static/images";  // Directory to save images
     @Autowired
     public RecipeService(RecipeRepository recipeRepository, UserRepository userRepository, ImageRepository imageRepository, CategoryRepository categoryRepository, RecipeMapper recipeMapper) {
         this.recipeRepository = recipeRepository;

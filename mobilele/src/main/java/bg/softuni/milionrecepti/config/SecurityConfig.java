@@ -51,6 +51,7 @@ public class SecurityConfig {
                         "/recipes/recipes_dashboard/**",
                         "/recipe_add",
                         "/ivan/ivan",
+                        "/src/main/resources/static/images/**",
                         "/recipes/**").permitAll().
                 antMatchers("/offers/add").authenticated().
                 antMatchers("/offers/**").permitAll().
