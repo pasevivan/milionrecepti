@@ -1,5 +1,7 @@
 package bg.softuni.milionrecepti.model.dto.recipe;
 
+import bg.softuni.milionrecepti.model.enums.RecipeSpeedEnum;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -22,6 +24,8 @@ public class RecipeDTO {
     private String author;
 
     private boolean approved;
+
+    private String recipeSpeed;
 
 
 
@@ -135,5 +139,13 @@ public class RecipeDTO {
 
     public String getAuthor() {
         return getAuthorFirstName() + " " + getAuthorLastName();
+    }
+
+    public String getRecipeSpeed() {
+        return recipeSpeed;
+    }
+
+    public void setRecipeSpeed(String recipeSpeed) {
+        this.recipeSpeed = recipeSpeed;
     }
 }

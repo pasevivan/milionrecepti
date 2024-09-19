@@ -2,7 +2,11 @@ package bg.softuni.milionrecepti.model.dto.recipe;
 
 
 import bg.softuni.milionrecepti.model.enums.CategoryEnum;
+import bg.softuni.milionrecepti.model.enums.RecipeSpeedEnum;
 import bg.softuni.milionrecepti.model.enums.SubcategoryEnum;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import net.bytebuddy.implementation.bind.annotation.Default;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.Min;
@@ -23,10 +27,10 @@ public class CreateRecipeDTO {
     private SubcategoryEnum subcategory;
     @NotNull
     private boolean vegetarian;
-    @NotBlank
-    private String firstImage;
-    private String secondImage;
-    private String thirdImage;
+//    @NotBlank
+//    private String firstImage;
+//    private String secondImage;
+//    private String thirdImage;
     @NotNull
     @Min(1)
     private int portions;
@@ -41,6 +45,13 @@ public class CreateRecipeDTO {
     private int minutes;
 
     private Set<MultipartFile> images;
+
+    //@JsonProperty(defaultValue = "НЕКАТЕГОРИЗИРАНА") // Default value for deserialization
+    private RecipeSpeedEnum recipeSpeed;
+
+//    public CreateRecipeDTO() {
+//        this.recipeSpeed = RecipeSpeedEnum.НЕКАТЕГОРИЗИРАНА; // Default value
+//    }
 
 
     public String getName() {
@@ -75,29 +86,29 @@ public class CreateRecipeDTO {
         this.vegetarian = vegetarian;
     }
 
-    public String getFirstImage() {
-        return firstImage;
-    }
-
-    public void setFirstImage(String firstImage) {
-        this.firstImage = firstImage;
-    }
-
-    public String getSecondImage() {
-        return secondImage;
-    }
-
-    public void setSecondImage(String secondImage) {
-        this.secondImage = secondImage;
-    }
-
-    public String getThirdImage() {
-        return thirdImage;
-    }
-
-    public void setThirdImage(String thirdImage) {
-        this.thirdImage = thirdImage;
-    }
+//    public String getFirstImage() {
+//        return firstImage;
+//    }
+//
+//    public void setFirstImage(String firstImage) {
+//        this.firstImage = firstImage;
+//    }
+//
+//    public String getSecondImage() {
+//        return secondImage;
+//    }
+//
+//    public void setSecondImage(String secondImage) {
+//        this.secondImage = secondImage;
+//    }
+//
+//    public String getThirdImage() {
+//        return thirdImage;
+//    }
+//
+//    public void setThirdImage(String thirdImage) {
+//        this.thirdImage = thirdImage;
+//    }
 
     public int getPortions() {
         return portions;
@@ -145,5 +156,14 @@ public class CreateRecipeDTO {
 
     public void setImages(Set<MultipartFile> images) {
         this.images = images;
+    }
+
+    public RecipeSpeedEnum getRecipeSpeed() {
+        return recipeSpeed != null ? recipeSpeed : RecipeSpeedEnum.НЕКАТЕГОРИЗИРАНА;
+        //return recipeSpeed;
+    }
+
+    public void setRecipeSpeed(RecipeSpeedEnum recipeSpeed) {
+        this.recipeSpeed = recipeSpeed;
     }
 }

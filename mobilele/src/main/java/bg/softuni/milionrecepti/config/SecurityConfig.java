@@ -44,8 +44,10 @@ public class SecurityConfig {
                         antMatchers("/",
 
                         "/index/**",
+                        "/navbar",
                         "/all",
                         "/recipe_details/**",
+                        "/images/**",
                         "/users/login",
                         "/users/register",
                         "/recipes/recipes_dashboard/**",

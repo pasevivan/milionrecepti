@@ -113,7 +113,7 @@ public class RecipeController {
 //    }
 
     @PostMapping("/recipe_add")
-    public String addRecipe(@ModelAttribute("addRecipeModel") CreateRecipeDTO addRecipeDTO,
+    public String addRecipe(@Valid @ModelAttribute("addRecipeModel") CreateRecipeDTO addRecipeDTO,
                             BindingResult bindingResult,
                             RedirectAttributes redirectAttributes,
                             Principal principal) {

@@ -276,23 +276,24 @@ public class RecipeService {
 //        }
 //    }
 
-    public void addRecipe(CreateRecipeDTO createRecipeDTO, UserDetails userDetails) throws IOException {
+    public void addRecipe(CreateRecipeDTO addRecipeDTO, UserDetails userDetails) throws IOException {
         long millis = System.currentTimeMillis();
         Date date = new Date(millis);
 
         RecipeEntity newRecipe = new RecipeEntity();
-        newRecipe.setName(createRecipeDTO.getName());
-        newRecipe.setCategory(categoryRepository.findByCategory(createRecipeDTO.getCategory())
+        newRecipe.setName(addRecipeDTO.getName());
+        newRecipe.setCategory(categoryRepository.findByCategory(addRecipeDTO.getCategory())
                 .orElseThrow(() -> new RuntimeException("Category not found")));
-        newRecipe.setSubcategory(createRecipeDTO.getSubcategory());
-        //newRecipe.setVegetarian(createRecipeDTO.isVegetarian());
-        newRecipe.setPortions(createRecipeDTO.getPortions());
-        newRecipe.setIngredients(createRecipeDTO.getIngredients());
-        newRecipe.setMaking(createRecipeDTO.getMaking());
-        newRecipe.setHours(createRecipeDTO.getHours());
-        newRecipe.setMinutes(createRecipeDTO.getMinutes());
+        newRecipe.setSubcategory(addRecipeDTO.getSubcategory());
+        //newRecipe.setVegetarian(addRecipeDTO.isVegetarian());
+        newRecipe.setPortions(addRecipeDTO.getPortions());
+        newRecipe.setIngredients(addRecipeDTO.getIngredients());
+        newRecipe.setMaking(addRecipeDTO.getMaking());
+        newRecipe.setHours(addRecipeDTO.getHours());
+        newRecipe.setMinutes(addRecipeDTO.getMinutes());
         newRecipe.setCreatedOn(date);
         newRecipe.setApproved(false);
+        newRecipe.setRecipeSpeed(addRecipeDTO.getRecipeSpeed());
 
         UserEntity author = userRepository.findByEmail(userDetails.getUsername())
                 .orElseThrow(() -> new RuntimeException("User not found"));
@@ -302,7 +303,7 @@ public class RecipeService {
         RecipeEntity savedRecipe = recipeRepository.save(newRecipe);
 
         // Handle image uploads
-        for (MultipartFile imageFile : createRecipeDTO.getImages()) {
+        for (MultipartFile imageFile : addRecipeDTO.getImages()) {
             if (!imageFile.isEmpty()) {
                 saveImageLocally(imageFile, savedRecipe);
             }

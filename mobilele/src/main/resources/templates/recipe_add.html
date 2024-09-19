@@ -32,7 +32,7 @@
               th:method="POST"
               th:object="${addRecipeModel}"
               enctype="multipart/form-data">
-        >
+
             <div class="row">
                 <div class="form-group col-md-6 mb-3">
                     <label for="name">Име на рецептата:</label>
@@ -57,11 +57,12 @@
                             th:errorclass="is-invalid">
                         <option value="">- Избери категория -</option>
                         <option th:each="cat : ${T(bg.softuni.milionrecepti.model.enums.CategoryEnum).values()}"
-                                th:selected="${cat} == *{category}"
-                                th:text="${cat}"
-                                th:value="${cat}">
+                                th:selected="${cat.name()} == *{category}"
+                                th:text="${#strings.replace(cat.name(), '_', ' ')}"
+                                th:value="${cat.name()}">
                             Категория
                         </option>
+
                     </select>
                     <p class="invalid-feedback errors alert alert-danger" style="margin-top: -2px">
                         Категорията на рецептата е задължителна.
@@ -78,9 +79,9 @@
                             th:errorclass="is-invalid">
                         <option value="">- Избери подкатегория -</option>
                         <option th:each="s : ${T(bg.softuni.milionrecepti.model.enums.SubcategoryEnum).values()}"
-                                th:selected="${s} == *{subcategory}"
-                                th:text="${s}"
-                                th:value="${s}">
+                                th:selected="${s.name()} == *{subcategory}"
+                                th:text="${#strings.replace(s.name(), '_', ' ')}"
+                                th:value="${s.name()}">
                             Подкатегория
                         </option>
                     </select>
@@ -88,48 +89,21 @@
                         Подкатегорията на рецептата е задължителна.
                     </p>
                 </div>
-                <div class="form-group col-md-6 mb-3">
-                    <label>Вегетарианска ли е рецептата?</label>
-                    <div>
-                        <input type="radio" id="no" name="no" value="false" th:field="*{vegetarian}">
-                        <label for="no">Не</label>
-                    </div>
-                    <div>
-                        <input type="radio" id="yes" name="yes" value="true" th:field="*{vegetarian}">
-                        <label for="yes">Да</label>
-                    </div>
-                </div>
+<!--                <div class="form-group col-md-6 mb-3">-->
+<!--                    <label>Вегетарианска ли е рецептата?</label>-->
+<!--                    <div>-->
+<!--                        <input type="radio" id="no" name="no" value="false" th:field="*{vegetarian}">-->
+<!--                        <label for="no">Не</label>-->
+<!--                    </div>-->
+<!--                    <div>-->
+<!--                        <input type="radio" id="yes" name="yes" value="true" th:field="*{vegetarian}">-->
+<!--                        <label for="yes">Да</label>-->
+<!--                    </div>-->
+<!--                </div>-->
             </div>
             <div>
-<!--                <label>Избери минимум 1 и максимум 3 (URL) снимки:</label>-->
-<!--                <input-->
-<!--                        class="form-control"-->
-<!--                        placeholder="Качи снимка тук"-->
-<!--                        th:errorclass="is-invalid"-->
-<!--                        th:field="*{firstImage}"-->
-<!--                        type="url"-->
-<!--                />-->
-<!--                <p class="invalid-feedback errors alert alert-danger" style="margin-top: -2px">-->
-<!--                    Моля, качи снимка на рецептата.-->
-<!--                </p>-->
-<!--                <input-->
-<!--                        class="form-control"-->
-<!--                        id="secondImage"-->
-<!--                        placeholder="Качи снимка тук"-->
-<!--                        th:field="*{secondImage}"-->
-<!--                        type="url"-->
-<!--                />-->
-<!--                <input-->
-<!--                        class="form-control"-->
-<!--                        id="thirdImage"-->
-<!--                        placeholder="Качи снимка тук"-->
-<!--                        th:field="*{thirdImage}"-->
-<!--                        type="url"-->
-<!--                />-->
-                <div>
-                    <label for="images">Upload Images:</label>
-                    <input type="file" id="images" name="images" multiple>
-                </div>
+                 <label for="images">Качи снимка тук:</label>
+                 <input type="file" id="images" name="images" value="Избери" multiple>
             </div>
             <div>
                 <label for="portions">Порции:</label>

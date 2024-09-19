@@ -12,12 +12,17 @@ public class CategoryEntity extends BaseEntity{
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private CategoryEnum category;
+
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<RecipeEntity> recipes = new HashSet<>();
+
+
 
     public CategoryEnum getCategory() {
         return category;
     }
+
+
 
     public CategoryEntity setCategory(CategoryEnum category) {
         this.category = category;

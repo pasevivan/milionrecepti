@@ -1,11 +1,11 @@
 package bg.softuni.milionrecepti.model.entity;
 
-import bg.softuni.milionrecepti.model.enums.CategoryEnum;
+import bg.softuni.milionrecepti.model.enums.RecipeSpeedEnum;
 import bg.softuni.milionrecepti.model.enums.SubcategoryEnum;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 import javax.validation.constraints.Positive;
-import java.sql.Array;
 import java.util.*;
 
 @Entity
@@ -47,6 +47,11 @@ public class RecipeEntity extends BaseEntity{
     private int minutes;
     @Column(name = "created_on", nullable = false)
     private Date createdOn;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    @JsonProperty(defaultValue = "НЕКАТЕГОРИЗИРАНА") // Default value for deserialization
+    private RecipeSpeedEnum recipeSpeed;
 
     public String getName() {
         return name;
@@ -156,4 +161,15 @@ public class RecipeEntity extends BaseEntity{
         return this;
     }
 
+    public boolean isApproved() {
+        return approved;
+    }
+
+    public RecipeSpeedEnum getRecipeSpeed() {
+        return recipeSpeed;
+    }
+
+    public void setRecipeSpeed(RecipeSpeedEnum recipeSpeed) {
+        this.recipeSpeed = recipeSpeed;
+    }
 }
